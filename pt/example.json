@@ -1,0 +1,4 @@
+{
+  "basic_input": "Esse é um exemplo de texto simples",
+  "html_example": "<p>Esse exemplo para avaliar com o uso de <strong>tags html</strong></p>, e algumas variaveis {{variable1}}, {{variable2}}"
+}

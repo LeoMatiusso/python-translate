@@ -1,0 +1,63 @@
+# JSON File Translator
+
+This Python script translates JSON files from one language to another using the `deep_translator` package and Google Translate API. It handles dynamic content like keys inside double curly braces (`{{key}}`) and HTML tags by protecting them from being translated and restoring them afterwards.
+
+## Features
+
+- Translates large JSON files.
+- Handles dynamic keys and HTML content by protecting them during translation.
+- Splits large strings into chunks that are safe to translate without breaking HTML tags or dynamic keys.
+- Skips already translated files, ensuring no redundant work.
+
+## Requirements
+
+- Python 3.8+
+- The `deep_translator` package
+
+## Installation
+
+1. Clone the repository or download the script.
+2. Install the required packages by running the following command:
+
+   ```bash
+   pip install deep-translator
+   ```
+
+## Usage
+
+1. Place the files to be translated in the `./pt` folder (or modify the path in the script to your desired folder).
+2. Set the output folder for translated files (currently `./it` folder, modify as needed).
+
+3. Run the script with:
+
+   ```bash
+   python your_script_name.py
+   ```
+
+## Script Structure
+
+### Key Functions
+
+- `protect_special_content(text)`: Protects dynamic keys (`{{key}}`) and HTML tags from being translated.
+- `restore_special_content(text, dynamic_keys, html_tags)`: Restores the protected content back into the translated text.
+- `split_text_safely(text, base_length=4000, max_length=5000)`: Splits text into safe chunks for translation, ensuring that HTML tags or dynamic keys are not broken in the process.
+- `translate_large_string(text)`: Handles large strings by splitting, translating each chunk, and then restoring the special content.
+- `translate_json_values(data)`: Recursively translates all string values within a JSON file while protecting special content.
+- `process_and_translate_file(file_path, output_folder)`: Processes a JSON file by translating it and saving the result in the specified output folder.
+
+## Example
+
+If you have a folder with JSON files in `./pt` and you want to translate them to English and save them in `./output`, run the script and it will process each JSON file in the folder and skip already translated files.
+
+### Output
+
+The script will output translated files in the `./output` folder, preserving the structure and keys of the original JSON files.
+
+```bash
+Translated file saved to: ./output/file1.json
+```
+
+### Notes
+
+- Modify the input_folder_path and output_folder_path in the script as needed.
+- You can change the target language by adjusting the target parameter in the GoogleTranslator instance at the beginning of the script.
