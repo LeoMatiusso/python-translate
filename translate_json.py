@@ -3,7 +3,7 @@ import os
 import re
 from deep_translator import GoogleTranslator
 
-translator = GoogleTranslator(source='auto', target='en') # target = language you want to translate the files
+translator = GoogleTranslator(source='auto', target='it') # target = language you want to translate the files
 
 def protect_special_content(text):
     # prevent dynamic keys to be translated
@@ -43,13 +43,13 @@ def split_text_safely(text, base_length=4000, max_length=5000):
     for word in words:
         if len(current_chunk) + len(word) + 1 > base_length:
             while not is_safe_to_split(current_chunk) and len(current_chunk) < max_length:
-                current_chunk += word + " "
+                current_chunk += word + ""
                 word = next(iter(words), "")
 
             chunks.append(current_chunk.strip())
-            current_chunk = word + " "
+            current_chunk = word + ""
         else:
-            current_chunk += word + " "
+            current_chunk += word + ""
 
     if current_chunk.strip():
         chunks.append(current_chunk.strip())
